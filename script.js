@@ -102,7 +102,7 @@ function openBankTransferFlow() {
           <img src="${PAYMENT_CONFIG.logoUrl}" alt="Shop Avatar" class="celfin-shop-avatar" onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=38x38&data=${encodeURIComponent(PAYMENT_CONFIG.shopName)}';">
           <div>
             <div class="celfin-shop-name">${PAYMENT_CONFIG.shopName}</div>
-            <div class="celfin-inv-str">INVOICE <br>${PAYMENT_CONFIG.invoiceNo}</div>
+            <div class="celfin-inv-str">Inv No: ${PAYMENT_CONFIG.invoiceNo}</div>
           </div>
         </div>
         <div class="celfin-summary-right">
@@ -240,7 +240,7 @@ function openTaptapFlow() {
           <img src="${PAYMENT_CONFIG.logoUrl}" alt="Shop Avatar" class="celfin-shop-avatar" onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=38x38&data=${encodeURIComponent(PAYMENT_CONFIG.shopName)}';">
           <div>
             <div class="celfin-shop-name">${PAYMENT_CONFIG.shopName}</div>
-            <div class="celfin-inv-str">INVOICE <br>${PAYMENT_CONFIG.invoiceNo}</div>
+            <div class="celfin-inv-str">Inv No: ${PAYMENT_CONFIG.invoiceNo}</div>
           </div>
         </div>
         <div class="celfin-summary-right">
@@ -308,6 +308,15 @@ function handleTtFileSelect(input) {
 }
 
 function submitTtAdminReview() {
+  const trx1 = document.getElementById('tt-trx-input')?.value.trim() || '';
+  const trx2 = document.getElementById('tt-trx2')?.value.trim() || '';
+  const sender = document.getElementById('tt-sender')?.value.trim() || '';
+
+  if (!trx1 && !trx2 && !sender) {
+    showToast('অনুগ্রহ করে ট্রানজেকশন আইডি অথবা প্রেরকের তথ্য দিন');
+    return;
+  }
+
   showToast('Your payment details have been submitted for Admin Review!');
   confirmPayment('Taptap Send');
 }
@@ -428,7 +437,7 @@ function openCelfinFlow() {
           <img src="${PAYMENT_CONFIG.logoUrl}" alt="Shop Avatar" class="celfin-shop-avatar" onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=38x38&data=${encodeURIComponent(PAYMENT_CONFIG.shopName)}';">
           <div>
             <div class="celfin-shop-name">${PAYMENT_CONFIG.shopName}</div>
-            <div class="celfin-inv-str">INVOICE <br>${PAYMENT_CONFIG.invoiceNo}</div>
+            <div class="celfin-inv-str">Inv No: ${PAYMENT_CONFIG.invoiceNo}</div>
           </div>
         </div>
         <div class="celfin-summary-right">
@@ -533,7 +542,7 @@ function openUpayStep1() {
         
         <input type="tel" id="up-phone-input" class="bk-phone-input-field" placeholder="e.g 01XXXXXXXXX" maxlength="11" oninput="handleUpPhoneInput(this)">
         <div class="bk-terms-text">
-          Confirm and proceed, <u style="cursor:default; text-decoration:underline;">terms &amp; conditions</u>
+          Confirm and proceed, <u style="cursor:pointer;" onclick="openTerms()">terms &amp; conditions</u>
         </div>
       </div>
 
@@ -910,10 +919,10 @@ function handleRkPhoneInput(input) {
   const val = input.value.trim();
   if (val.length >= 11) {
     btn.disabled = false;
-    btn.classList.add('active');
+    btn.classList.add('btn-rk-confirm', 'active');
   } else {
     btn.disabled = true;
-    btn.classList.remove('active');
+    btn.classList.remove('btn-rk-confirm', 'active');
   }
 }
 
@@ -1070,7 +1079,7 @@ function openNagadStep1() {
       <div>
         <h4 class="ng-body-title">Your Nagad Account Number</h4>
         <input type="tel" id="ng-phone-input" class="ng-phone-input-field" placeholder="01XXXXXXXXX" maxlength="11" oninput="handleNgPhoneInput(this)">
-        <p class="ng-terms-subtext">Confirm and proceed, <u style="cursor:default; text-decoration:underline;">terms &amp; conditions</u></p>
+        <p class="ng-terms-subtext">Confirm and proceed, <u style="cursor:pointer;" onclick="openTerms()">terms &amp; conditions</u></p>
       </div>
 
       <div class="ng-actions-row">
@@ -1174,7 +1183,7 @@ function openNagadStep2(userPhone) {
 
         <div class="trx-toggle-row">
           <div class="bk-timer-row">
-            Session expires in <span id="ng-countdown" style="font-family:monospace; font-weight:700;">09:47</span>
+            Session expires in <span id="ng-countdown" style="font-family:monospace; font-weight:700;">10:00</span>
           </div>
           <button class="btn-add-trx-pill" onclick="toggleTrxInput('ng-trx-box')">Add Transaction ID</button>
         </div>
@@ -1205,7 +1214,7 @@ function openNagadStep2(userPhone) {
 let ngTimerInterval = null;
 function startNgCountdown() {
   if (ngTimerInterval) clearInterval(ngTimerInterval);
-  let sec = 587;
+  let sec = 600;
   ngTimerInterval = setInterval(() => {
     const timerElem = document.getElementById('ng-countdown');
     if (!timerElem) {
@@ -1260,7 +1269,7 @@ function openBkashStep1() {
         
         <input type="tel" id="bk-phone-input" class="bk-phone-input-field" placeholder="e.g 01XXXXXXXXX" maxlength="11" oninput="handleBkPhoneInput(this)">
         <div class="bk-terms-text">
-          Confirm and proceed, <u style="cursor:default; text-decoration:underline;">terms &amp; conditions</u>
+          Confirm and proceed, <u style="cursor:pointer;" onclick="openTerms()">terms &amp; conditions</u>
         </div>
       </div>
 
@@ -1468,9 +1477,26 @@ function openCombinedDetailsModal() {
   backdrop.classList.add('active');
 }
 
+function clearAllTimers() {
+  if (upTimerInterval) { clearInterval(upTimerInterval); upTimerInterval = null; }
+  if (bqrTimerInterval) { clearInterval(bqrTimerInterval); bqrTimerInterval = null; }
+  if (rkTimerInterval) { clearInterval(rkTimerInterval); rkTimerInterval = null; }
+  if (ngTimerInterval) { clearInterval(ngTimerInterval); ngTimerInterval = null; }
+  if (bkTimerInterval) { clearInterval(bkTimerInterval); bkTimerInterval = null; }
+}
+
 function closeModal() {
+  clearAllTimers();
   const backdrop = document.getElementById('modal-backdrop');
   if (backdrop) backdrop.classList.remove('active');
+}
+
+function openTerms() {
+  if (PAYMENT_CONFIG.termsUrl) {
+    window.open(PAYMENT_CONFIG.termsUrl, '_blank');
+  } else {
+    showToast('Terms & Conditions page is coming soon.');
+  }
 }
 
 function copyValue(val) {
@@ -1498,6 +1524,7 @@ function downloadReceiptImage() {
       scale: 2,
       backgroundColor: '#FFFFFF',
       useCORS: true,
+      allowTaint: true,
       logging: false
     }).then(canvas => {
       const link = document.createElement('a');
