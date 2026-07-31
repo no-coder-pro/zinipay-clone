@@ -46,7 +46,7 @@ body {
 }
 
 /* Mobile Touch & Tap Optimizations */
-button, .method-card, .tab-pill, .pill-action-btn, .circle-btn, .icon-btn-round, input, a {
+button, .method-card, .tab-pill, .circle-btn, .icon-btn-round, input, a {
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
 }
@@ -421,12 +421,6 @@ button, .method-card, .tab-pill, .pill-action-btn, .circle-btn, .icon-btn-round,
   background: #F1F5F9;
 }
 
-.top-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1.25rem;
-}
 
 .icon-btn-round {
   width: 38px;
@@ -447,11 +441,6 @@ button, .method-card, .tab-pill, .pill-action-btn, .circle-btn, .icon-btn-round,
   color: var(--text-dark);
 }
 
-.top-right-actions {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
 
 .circle-btn {
   width: 38px;
@@ -992,6 +981,12 @@ button, .method-card, .tab-pill, .pill-action-btn, .circle-btn, .icon-btn-round,
   cursor: pointer;
 }
 
+.btn-rk-confirm.active {
+  background: #8E24AA;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+
 /* ROCKET STYLES */
 .rk-purple-body {
   background: #8E24AA;
@@ -1037,20 +1032,6 @@ button, .method-card, .tab-pill, .pill-action-btn, .circle-btn, .icon-btn-round,
   overflow: hidden;
 }
 
-.ng-lang-switcher {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: #FFFFFF;
-  color: #8C1306;
-  padding: 3px 8px;
-  border-radius: 6px;
-  font-size: 0.7rem;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
 
 .ng-header-section {
   display: flex;
@@ -1408,7 +1389,7 @@ button, .method-card, .tab-pill, .pill-action-btn, .circle-btn, .icon-btn-round,
 }
 
 .bqr-qr-image-wrapper {
-  border: 2px stroke var(--primary-blue);
+  border: 2px solid var(--primary-blue);
   border-radius: 12px;
   padding: 4px;
   background: #FFF;
