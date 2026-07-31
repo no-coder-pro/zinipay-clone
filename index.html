@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Wala Checkout</title>
+  <meta name="description" content="Premium Wala Payment Gateway">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="checkout-wrapper">
+    <div class="top-nav">
+      <button class="icon-btn-round" title="Home" onclick="showToast('Home')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+      </button>
+
+      <div class="top-right-actions">
+        <button class="circle-btn" title="Payment Note" onclick="openDrawerInfo('note')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+          </svg>
+        </button>
+
+        <button class="circle-btn" title="Live Chat" onclick="openDrawerInfo('chat')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+          </svg>
+        </button>
+
+        <button class="circle-btn" title="Close" onclick="showToast('Checkout active')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="shop-profile">
+      <div class="shop-logo-frame">
+        <img src="images/logo.jpg" alt="Shop Logo" class="shop-logo-img" onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=76x76&data=PremiumWala';">
+      </div>
+      <div class="shop-meta">
+        <div class="shop-title-container">
+          <h2 class="shop-title">Premium Wala</h2>
+        </div>
+        <div class="shop-actions">
+          <button class="pill-action-btn" onclick="openDrawerInfo('support')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+              <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+            </svg>
+            <span>সাপোর্ট</span>
+          </button>
+          <button class="pill-action-btn" onclick="openDrawerInfo('info')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            <span>তথ্যাদি</span>
+          </button>
+          <button class="pill-action-btn" onclick="openDrawerInfo('details')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="8" y1="6" x2="21" y2="6"></line>
+              <line x1="8" y1="12" x2="21" y2="12"></line>
+              <line x1="8" y1="18" x2="21" y2="18"></line>
+              <line x1="3" y1="6" x2="3.01" y2="6"></line>
+              <line x1="3" y1="12" x2="3.01" y2="12"></line>
+              <line x1="3" y1="18" x2="3.01" y2="18"></line>
+            </svg>
+            <span>বিস্তারিত</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="tabs-header">
+      <button class="tab-pill active" id="tab-btn-mobile" onclick="switchTab('mobile')">Mobile Banking</button>
+      <button class="tab-pill" id="tab-btn-bank" onclick="switchTab('bank')">Bank Transfer</button>
+      <button class="tab-pill" id="tab-btn-international" onclick="switchTab('international')">International</button>
+    </div>
+
+    <div class="tab-pane" id="pane-mobile">
+      <div class="methods-grid">
+        <div class="method-card" onclick="openFlow('bangla-qr')">
+          <div class="logo-area"><img src="images/bangla_qr.png" alt="Bangla QR"></div>
+          <div class="card-divider"></div>
+          <div class="card-footer-info"><span class="method-title">Bangla QR</span><span class="badge-type">Personal</span></div>
+        </div>
+
+        <div class="method-card" onclick="openFlow('bkash')">
+          <div class="logo-area"><img src="images/bkash.png" alt="bKash"></div>
+          <div class="card-divider"></div>
+          <div class="card-footer-info"><span class="method-title">Bkash</span><span class="badge-type">Personal</span></div>
+        </div>
+
+        <div class="method-card" onclick="openFlow('nagad')">
+          <div class="logo-area"><img src="images/nagad.png" alt="Nagad"></div>
+          <div class="card-divider"></div>
+          <div class="card-footer-info"><span class="method-title">Nagad</span><span class="badge-type">Personal</span></div>
+        </div>
+
+        <div class="method-card" onclick="openFlow('rocket')">
+          <div class="logo-area"><img src="images/rocket.png" alt="Rocket"></div>
+          <div class="card-divider"></div>
+          <div class="card-footer-info"><span class="method-title">Rocket</span><span class="badge-type">Personal</span></div>
+        </div>
+
+        <div class="method-card" onclick="openFlow('upay')">
+          <div class="logo-area"><img src="images/upay.png" alt="Upay"></div>
+          <div class="card-divider"></div>
+          <div class="card-footer-info"><span class="method-title">Upay</span><span class="badge-type">Personal</span></div>
+        </div>
+
+        <div class="method-card" onclick="openFlow('cellfin')">
+          <div class="logo-area"><img src="images/celfin.png" alt="CellFin"></div>
+          <div class="card-divider"></div>
+          <div class="card-footer-info"><span class="method-title">CellFin</span><span class="badge-type">Personal</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-pane" id="pane-bank" style="display:none;">
+      <div class="methods-grid" style="grid-template-columns: 1fr;">
+        <div class="method-card" style="padding: 1rem;" onclick="openFlow('bank-ibbl')">
+          <div class="logo-area" style="height:40px;"><img src="images/celfin.png" alt="Islami Bank"></div>
+          <div class="card-divider"></div>
+          <div class="card-footer-info"><span class="method-title">Islami Bank Bangladesh PLC</span><span class="badge-type">Direct Wire</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-pane" id="pane-international" style="display:none;">
+      <div class="methods-grid">
+        <div class="method-card" onclick="openFlow('binance')">
+          <div class="logo-area">
+            <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
+              <rect width="48" height="48" rx="12" fill="#181A20" />
+              <path d="M24 12L18 18L24 24L30 18L24 12Z" fill="#F0B90B" />
+              <path d="M12 24L18 30L24 24L18 18L12 24Z" fill="#F0B90B" />
+              <path d="M24 24L30 30L36 24L30 18L24 24Z" fill="#F0B90B" />
+              <path d="M24 36L18 30L24 24L30 30L24 36Z" fill="#F0B90B" />
+            </svg>
+          </div>
+          <div class="card-divider"></div>
+          <div class="card-footer-info"><span class="method-title">Binance Pay</span><span class="badge-type">USDT</span></div>
+        </div>
+
+        <div class="method-card" onclick="openFlow('taptap')">
+          <div class="logo-area"><img src="images/taptap-send.jpg" alt="Taptap Send"></div>
+          <div class="card-divider"></div>
+          <div class="card-footer-info"><span class="method-title">Taptap Send</span><span class="badge-type">Global</span></div>
+        </div>
+      </div>
+    </div>
+
+    <button class="pay-banner-btn" onclick="openFlow('bkash')">
+      Pay 182 BDT
+    </button>
+  </div>
+
+  <div class="modal-backdrop" id="modal-backdrop" onclick="if(event.target===this) closeModal();">
+    <div class="modal-dialog" id="modal-body"></div>
+  </div>
+
+  <div class="toast-msg" id="toast">Copied</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
