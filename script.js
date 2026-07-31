@@ -1,3 +1,6 @@
+/* ==========================================================================
+   SECTION 1: GLOBAL CONFIGURATION & HELPER UTILITIES
+   ========================================================================== */
 const PAYMENT_CONFIG = {
   shopName: "Premium Wala",
   invoiceNo: "INV-XXXXXXXXXX",
@@ -6,7 +9,10 @@ const PAYMENT_CONFIG = {
   chargeBDT: 2,
   logoUrl: "images/logo.jpg",
   helplinePhone: "+880 XXXXXXXXXX",
-  whatsappUrl: "#",
+  whatsappUrl: "https://wa.me/8801XXXXXXXXX",
+  messengerUrl: "https://m.me/PremiumWala",
+  telegramUrl: "https://t.me/PremiumWala",
+  termsUrl: "", // Set this URL when Terms & Conditions page is ready
 
   bkashNumber: "01XXXXXXXXX",
   nagadNumber: "01XXXXXXXXX",
@@ -73,6 +79,9 @@ function submitManualTrx(methodName, inputId) {
   confirmPayment(methodName);
 }
 
+/* ==========================================================================
+   SECTION 2: ISLAMI BANK DIRECT WIRE TRANSFER FLOW
+   ========================================================================== */
 function openBankTransferFlow() {
   const backdrop = document.getElementById('modal-backdrop');
   const container = document.getElementById('modal-body');
@@ -208,6 +217,9 @@ function submitBankPayment() {
   confirmPayment('Islami Bank Direct Wire');
 }
 
+/* ==========================================================================
+   SECTION 3: TAPTAP SEND PAYMENT FLOW
+   ========================================================================== */
 function openTaptapFlow() {
   const backdrop = document.getElementById('modal-backdrop');
   const container = document.getElementById('modal-body');
@@ -300,6 +312,9 @@ function submitTtAdminReview() {
   confirmPayment('Taptap Send');
 }
 
+/* ==========================================================================
+   SECTION 4: BINANCE PAY USDT FLOW
+   ========================================================================== */
 function openBinanceFlow() {
   const backdrop = document.getElementById('modal-backdrop');
   const container = document.getElementById('modal-body');
@@ -390,6 +405,9 @@ function submitBinancePayment() {
   confirmPayment('Binance Pay');
 }
 
+/* ==========================================================================
+   SECTION 5: CELFIN PAYMENT FLOW
+   ========================================================================== */
 function openCelfinFlow() {
   const backdrop = document.getElementById('modal-backdrop');
   const container = document.getElementById('modal-body');
@@ -479,6 +497,9 @@ function submitCelfinPayment() {
   confirmPayment('CellFin');
 }
 
+/* ==========================================================================
+   SECTION 6: UPAY PAYMENT FLOW
+   ========================================================================== */
 function openUpayStep1() {
   const backdrop = document.getElementById('modal-backdrop');
   const container = document.getElementById('modal-body');
@@ -511,9 +532,8 @@ function openUpayStep1() {
         <h3 class="bk-body-title">Your Upay Account Number</h3>
         
         <input type="tel" id="up-phone-input" class="bk-phone-input-field" placeholder="e.g 01XXXXXXXXX" maxlength="11" oninput="handleUpPhoneInput(this)">
-        
         <div class="bk-terms-text">
-          Confirm and proceed, <u onclick="openDrawerInfo('info')">terms & conditions</u>
+          Confirm and proceed, <u style="cursor:default; text-decoration:underline;">terms &amp; conditions</u>
         </div>
       </div>
 
@@ -661,6 +681,9 @@ function startUpCountdown() {
   }, 1000);
 }
 
+/* ==========================================================================
+   SECTION 7: BANGLA QR PAYMENT FLOW
+   ========================================================================== */
 function openBanglaQRStep1() {
   const backdrop = document.getElementById('modal-backdrop');
   const container = document.getElementById('modal-body');
@@ -830,6 +853,9 @@ function startBqrCountdown() {
   }, 1000);
 }
 
+/* ==========================================================================
+   SECTION 8: ROCKET PAYMENT FLOW
+   ========================================================================== */
 function openRocketStep1() {
   const backdrop = document.getElementById('modal-backdrop');
   const container = document.getElementById('modal-body');
@@ -862,9 +888,8 @@ function openRocketStep1() {
         <h3 class="bk-body-title">Your Rocket Account Number</h3>
         
         <input type="tel" id="rk-phone-input" class="bk-phone-input-field" placeholder="e.g 01XXXXXXXXX or 01XXXXXXXXXX" maxlength="12" oninput="handleRkPhoneInput(this)">
-        
         <div class="bk-terms-text">
-          Confirm and proceed, <u onclick="openDrawerInfo('info')">terms & conditions</u>
+          Confirm and proceed, <u style="cursor:default; text-decoration:underline;">terms &amp; conditions</u>
         </div>
       </div>
 
@@ -1012,16 +1037,15 @@ function startRkCountdown() {
   }, 1000);
 }
 
+/* ==========================================================================
+   SECTION 9: NAGAD PAYMENT FLOW
+   ========================================================================== */
 function openNagadStep1() {
   const backdrop = document.getElementById('modal-backdrop');
   const container = document.getElementById('modal-body');
 
   container.innerHTML = `
     <div class="ng-modal-container">
-      <div class="ng-lang-switcher">
-        <span>বাং</span> | <span>Eng</span>
-      </div>
-
       <div class="ng-header-section">
         <svg class="ng-cart-icon" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8">
           <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
@@ -1046,7 +1070,7 @@ function openNagadStep1() {
       <div>
         <h4 class="ng-body-title">Your Nagad Account Number</h4>
         <input type="tel" id="ng-phone-input" class="ng-phone-input-field" placeholder="01XXXXXXXXX" maxlength="11" oninput="handleNgPhoneInput(this)">
-        <p class="ng-terms-subtext">By clicking/tapping "Proceed" you are agreeing to our <strong>Terms and Conditions</strong></p>
+        <p class="ng-terms-subtext">Confirm and proceed, <u style="cursor:default; text-decoration:underline;">terms &amp; conditions</u></p>
       </div>
 
       <div class="ng-actions-row">
@@ -1095,10 +1119,6 @@ function openNagadStep2(userPhone) {
 
   container.innerHTML = `
     <div class="ng-modal-container">
-      <div class="ng-lang-switcher">
-        <span>বাং</span> | <span>Eng</span>
-      </div>
-
       <div class="ng-header-section">
         <svg class="ng-cart-icon" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8">
           <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
@@ -1204,6 +1224,9 @@ function startNgCountdown() {
   }, 1000);
 }
 
+/* ==========================================================================
+   SECTION 10: BKASH PAYMENT FLOW
+   ========================================================================== */
 function openBkashStep1() {
   const backdrop = document.getElementById('modal-backdrop');
   const container = document.getElementById('modal-body');
@@ -1236,9 +1259,8 @@ function openBkashStep1() {
         <h3 class="bk-body-title">Your bKash Account Number</h3>
         
         <input type="tel" id="bk-phone-input" class="bk-phone-input-field" placeholder="e.g 01XXXXXXXXX" maxlength="11" oninput="handleBkPhoneInput(this)">
-        
         <div class="bk-terms-text">
-          Confirm and proceed, <u onclick="openDrawerInfo('info')">terms & conditions</u>
+          Confirm and proceed, <u style="cursor:default; text-decoration:underline;">terms &amp; conditions</u>
         </div>
       </div>
 
@@ -1386,66 +1408,61 @@ function startBkCountdown() {
   }, 1000);
 }
 
-function openDrawerInfo(type) {
+
+/* ==========================================================================
+   SECTION 11: SOCIAL CHAT & CONSOLIDATED DETAILS MODALS
+   ========================================================================== */
+function openCombinedDetailsModal() {
   const backdrop = document.getElementById('modal-backdrop');
   const container = document.getElementById('modal-body');
 
-  let title = '';
-  let content = '';
-
-  if (type === 'support') {
-    title = '🎧 সাপোর্ট (Support)';
-    content = `
-      <p style="font-size:0.9rem; color:#475569; margin-bottom:1rem;">পেমেন্ট সংক্রান্ত যেকোনো সমস্যায় আমাদের হেল্পলাইনে যোগাযোগ করুন:</p>
-      <div style="display:flex; flex-direction:column; gap:0.75rem;">
-        <a href="tel:${PAYMENT_CONFIG.helplinePhone}" style="padding:0.85rem; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; text-decoration:none; color:#0F172A; font-weight:600; display:flex; align-items:center; gap:0.5rem;">
-          📞 Helpline: ${PAYMENT_CONFIG.helplinePhone}
-        </a>
-        <a href="${PAYMENT_CONFIG.whatsappUrl}" target="_blank" style="padding:0.85rem; background:#F0FDF4; border:1px solid #BBF7D0; border-radius:10px; text-decoration:none; color:#166534; font-weight:600; display:flex; align-items:center; gap:0.5rem;">
-          💬 WhatsApp Live Support
-        </a>
-      </div>
-    `;
-  } else if (type === 'info') {
-    title = 'ℹ️ তথ্যাদি (Terms & Info)';
-    content = `
-      <div style="font-size:0.875rem; color:#475569; line-height:1.6;">
-        <p style="margin-bottom:0.5rem;">• <strong>Payment Session:</strong> ১০ মিনিটের মধ্যে ট্রানজেকশন সম্পন্ন করুন।</p>
-        <p style="margin-bottom:0.5rem;">• <strong>Verification:</strong> সঠিক TrxID সাবমিট করার সাথে সাথেই অটো ভেরিফাই হবে।</p>
-        <p>• <strong>Security:</strong> আপনার পেমেন্ট তথ্য ২৫৬-বিট এনক্রিপশনের মাধ্যমে সম্পূর্ণ সুরক্ষিত।</p>
-      </div>
-    `;
-  } else if (type === 'details') {
-    title = '≡ বিস্তারিত (Order Details)';
-    content = `
-      <div style="font-size:0.875rem; color:#334155; line-height:1.7;">
-        <div style="display:flex; justify-content:space-between;"><span>Merchant:</span><strong>${PAYMENT_CONFIG.shopName}</strong></div>
-        <div style="display:flex; justify-content:space-between;"><span>Invoice No:</span><span style="font-family:monospace;">${PAYMENT_CONFIG.invoiceNo}</span></div>
-        <div style="display:flex; justify-content:space-between;"><span>Product:</span><span>Premium Service Package</span></div>
-        <hr style="margin:0.75rem 0; border:none; border-top:1px dashed #CBD5E1;">
-        <div style="display:flex; justify-content:space-between; font-weight:800; font-size:1rem; color:#0047BA;"><span>Total Payable:</span><span>৳${PAYMENT_CONFIG.amountBDT} BDT</span></div>
-      </div>
-    `;
-  } else if (type === 'note') {
-    title = '📄 পেমেন্ট নোট (Notes)';
-    content = `
-      <p style="font-size:0.875rem; color:#475569;">অনুগ্রহ করে সেন্ড মানি করার পর রেফারেন্স এ আপনার ইনভয়েস নম্বর অথবা ফোন নম্বর উল্লেখ করুন।</p>
-    `;
-  } else if (type === 'chat') {
-    title = '💬 ইনস্ট্যান্ট চ্যাট (Live Chat)';
-    content = `
-      <p style="font-size:0.875rem; color:#475569; margin-bottom:1rem;">আমাদের প্রতিনিধি অনলাইনে আছেন। যেকোনো প্রয়োজনে চ্যাট শুরু করুন।</p>
-      <button class="btn-action-submit" onclick="showToast('Live chat starting...')">Start Chat</button>
-    `;
-  }
-
   container.innerHTML = `
-    <div style="padding:1.25rem;">
-      <div class="flow-head">
-        <div class="flow-title-text">${title}</div>
-        <button class="close-x" onclick="closeModal()">&times;</button>
+    <div style="padding: 1.35rem; background: #FFFFFF; border-radius: 16px;">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom: 1.15rem; border-bottom: 1px solid #F1F5F9; padding-bottom: 0.85rem;">
+        <div style="display:flex; align-items:center; gap:0.6rem;">
+          <div style="width:36px; height:36px; border-radius:50%; background:#EEF5FF; color:#0047BA; display:flex; align-items:center; justify-content:center;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+          </div>
+          <div>
+            <h3 style="font-size:1.1rem; font-weight:800; color:#0F172A; line-height:1.2;">বিস্তারিত তথ্যাদি</h3>
+            <span style="font-size:0.75rem; color:#64748B;">Invoice & Shop Summary</span>
+          </div>
+        </div>
+        <button class="celfin-icon-btn" onclick="closeModal()" title="Close">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
       </div>
-      <div style="padding-top:0.5rem;">${content}</div>
+
+      <div style="display:flex; flex-direction:column; gap:0.85rem;">
+        <!-- Merchant & Invoice Box -->
+        <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:0.95rem;">
+          <div style="font-size:0.725rem; font-weight:800; color:#475569; text-transform:uppercase; margin-bottom:0.65rem; letter-spacing:0.05em; display:flex; align-items:center; gap:4px;">
+            <span>📌</span> মার্চেন্ট ও ইনভয়েস সামারি
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:0.45rem; font-size:0.85rem;">
+            <span style="color:#64748B; font-weight:500;">মার্চেন্ট নাম:</span>
+            <span style="font-weight:700; color:#0F172A;">${PAYMENT_CONFIG.shopName}</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:0.45rem; font-size:0.85rem;">
+            <span style="color:#64748B; font-weight:500;">ইনভয়েস রেফারেন্স:</span>
+            <span style="font-weight:700; font-family:monospace; color:#0047BA;">${PAYMENT_CONFIG.invoiceNo}</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-size:0.85rem;">
+            <span style="color:#64748B; font-weight:500;">মোট প্রদেয় মূল্য:</span>
+            <span style="font-weight:800; color:#059669;">৳ ${PAYMENT_CONFIG.amountBDT} BDT (${PAYMENT_CONFIG.amountUSDT} USDT)</span>
+          </div>
+        </div>
+
+        <!-- Order & Support Note Box -->
+        <div style="background:#FEF9C3; border:1px solid #FEF08A; border-radius:12px; padding:0.85rem 1rem; font-size:0.825rem; color:#854D0E; line-height:1.5;">
+          <strong style="display:flex; align-items:center; gap:4px; margin-bottom:4px; font-weight:800; color:#713F12;">
+            <span>📄</span> বিশেষ পেমেন্ট নির্দেশিকা:
+          </strong>
+          পেমেন্ট করার সময় রেফারেন্স বক্সে ইনভয়েস নম্বর (<strong>${PAYMENT_CONFIG.invoiceNo}</strong>) অথবা আপনার ফোন নম্বর উল্লেখ করতে ভুলবেন না।
+        </div>
+      </div>
+
+      <button style="width:100%; margin-top:1.15rem; background:#0F172A; color:#FFFFFF; border:none; border-radius:10px; padding:0.85rem; font-weight:800; font-size:0.9rem; cursor:pointer; box-shadow:0 4px 12px rgba(15,23,42,0.15);" onclick="closeModal()">বন্ধ করুন (Close)</button>
     </div>
   `;
   backdrop.classList.add('active');
@@ -1470,21 +1487,213 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 2500);
 }
 
+function downloadReceiptImage() {
+  const card = document.getElementById('success-receipt-card');
+  if (!card) return;
+
+  showToast('Generating receipt image...');
+
+  function generatePNG() {
+    html2canvas(card, {
+      scale: 2,
+      backgroundColor: '#FFFFFF',
+      useCORS: true,
+      logging: false
+    }).then(canvas => {
+      const link = document.createElement('a');
+      link.download = `Payment_Receipt_${PAYMENT_CONFIG.invoiceNo}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      showToast('✔ Receipt image downloaded!');
+    }).catch(err => {
+      console.error(err);
+      showToast('Failed to download image');
+    });
+  }
+
+  if (typeof html2canvas !== 'undefined') {
+    generatePNG();
+  } else {
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+    script.onload = generatePNG;
+    script.onerror = () => showToast('Could not load image download library');
+    document.head.appendChild(script);
+  }
+}
+
+function openWhatsApp() {
+  const url = PAYMENT_CONFIG.whatsappUrl || '#';
+  if (url !== '#') {
+    window.open(url, '_blank');
+  } else {
+    showToast('WhatsApp: ' + PAYMENT_CONFIG.helplinePhone);
+  }
+}
+
+function openTelegram() {
+  const url = PAYMENT_CONFIG.telegramUrl || '#';
+  if (url !== '#') {
+    window.open(url, '_blank');
+  } else {
+    showToast('Telegram: @PremiumWala');
+  }
+}
+
+function openMessenger() {
+  const url = PAYMENT_CONFIG.messengerUrl || '#';
+  if (url !== '#') {
+    window.open(url, '_blank');
+  } else {
+    showToast('Messenger: @PremiumWala');
+  }
+}
+
+/* ==========================================================================
+   SECTION 12: PAYMENT SUCCESSFUL, RECEIPT DOWNLOAD, ANIMATIONS & AUDIO SYNTHESIZER
+   ========================================================================== */
+function playSuccessSound() {
+  try {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContext) return;
+    const ctx = new AudioContext();
+
+    const playTone = (freq, start, duration) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, ctx.currentTime + start);
+      gain.gain.setValueAtTime(0.18, ctx.currentTime + start);
+      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + start + duration);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(ctx.currentTime + start);
+      osc.stop(ctx.currentTime + start + duration);
+    };
+
+    // Play a delightful two-tone chime (E5 -> B5)
+    playTone(659.25, 0, 0.22);
+    playTone(987.77, 0.12, 0.45);
+  } catch (e) {
+    console.log('Audio chime error:', e);
+  }
+}
+
+function triggerConfetti() {
+  if (typeof confetti !== 'function') return;
+
+  const defaults = {
+    zIndex: 99999,
+    disableForReducedMotion: true
+  };
+
+  // 1. EXPLOSION DIRECTLY FROM CARD CENTER BADGE
+  confetti({
+    ...defaults,
+    particleCount: 100,
+    spread: 100,
+    startVelocity: 45,
+    origin: { x: 0.5, y: 0.4 },
+    colors: ['#10B981', '#0047BA', '#E91E63', '#FCD535', '#8E24AA']
+  });
+
+  // 2. LEFT SIDE CANNON SHOOTING OVER CARD
+  confetti({
+    ...defaults,
+    particleCount: 50,
+    angle: 60,
+    spread: 70,
+    startVelocity: 50,
+    origin: { x: 0.1, y: 0.5 },
+    colors: ['#10B981', '#059669', '#34D399', '#FCD535']
+  });
+
+  // 3. RIGHT SIDE CANNON SHOOTING OVER CARD
+  confetti({
+    ...defaults,
+    particleCount: 50,
+    angle: 120,
+    spread: 70,
+    startVelocity: 50,
+    origin: { x: 0.9, y: 0.5 },
+    colors: ['#0047BA', '#E91E63', '#FCD535', '#10B981']
+  });
+
+  // 4. TOP FIREWORKS SHOWER OVER MODAL
+  setTimeout(() => {
+    confetti({
+      ...defaults,
+      particleCount: 70,
+      spread: 120,
+      startVelocity: 35,
+      origin: { x: 0.5, y: 0.2 },
+      colors: ['#10B981', '#FCD535', '#E91E63', '#0047BA']
+    });
+  }, 250);
+}
+
 function confirmPayment(name) {
+  playSuccessSound();
+  triggerConfetti();
+
   const container = document.getElementById('modal-body');
+  const randomTrx = 'TRX' + Math.random().toString(36).substring(2, 10).toUpperCase();
+  const dateStr = new Date().toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' });
+
   container.innerHTML = `
-    <div style="padding:1.25rem;">
-      <div class="flow-head" style="border-bottom:none;">
-        <div class="flow-title-text" style="color:#059669;">✔ পেমেন্ট সফল হয়েছে!</div>
-        <button class="close-x" onclick="closeModal()">&times;</button>
+    <div class="success-modal-card" id="success-receipt-card">
+      <div class="success-icon-wrapper">
+        <svg class="success-svg-check" viewBox="0 0 24 24" fill="none">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
       </div>
-      <div style="text-align:center; padding:1rem 0;">
-        <div style="width:56px; height:56px; background:#D1FAE5; color:#059669; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; margin-bottom:1rem;">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+
+      <h3 class="success-title">Payment Successful!</h3>
+      <p class="success-subtitle">পেমেন্ট সফলভাবে গৃহীত হয়েছে। আপনার অর্ডার কনফার্ম করা হলো।</p>
+
+      <div class="success-receipt-box">
+        <div class="success-amount-row">
+          <span class="success-amount-label">Amount Paid</span>
+          <span class="success-amount-val">৳ ${PAYMENT_CONFIG.amountBDT} BDT</span>
         </div>
-        <h4 style="font-size:1.1rem; font-weight:700; color:#0F172A; margin-bottom:0.5rem;">আপনার ৳${PAYMENT_CONFIG.amountBDT} BDT পেমেন্ট গৃহীত হয়েছে</h4>
-        <p style="font-size:0.85rem; color:#64748B; margin-bottom:1.25rem;">Merchant: <strong>${PAYMENT_CONFIG.shopName}</strong> | Method: <strong style="color:#059669;">${name}</strong></p>
-        <button class="btn-action-submit" style="background:#059669;" onclick="closeModal()">সম্পন্ন (Done)</button>
+
+        <div class="success-detail-row">
+          <span class="success-detail-label">Merchant Name</span>
+          <span class="success-detail-val">${PAYMENT_CONFIG.shopName}</span>
+        </div>
+
+        <div class="success-detail-row">
+          <span class="success-detail-label">Payment Method</span>
+          <span class="success-detail-val" style="color:#059669; font-weight:800;">${name}</span>
+        </div>
+
+        <div class="success-detail-row">
+          <span class="success-detail-label">Invoice Reference</span>
+          <span class="success-detail-val" style="font-family:monospace;">${PAYMENT_CONFIG.invoiceNo}</span>
+        </div>
+
+        <div class="success-detail-row">
+          <span class="success-detail-label">Transaction ID</span>
+          <div class="success-detail-val">
+            <span style="font-family:monospace; color:#0047BA;">${randomTrx}</span>
+            <button class="bank-mini-copy-btn" onclick="copyValue('${randomTrx}')" title="Copy TrxID">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="success-detail-row">
+          <span class="success-detail-label">Date & Time</span>
+          <span class="success-detail-val" style="font-size:0.75rem; color:#64748B;">${dateStr}</span>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; width: 100%;">
+        <button class="btn-download-receipt" onclick="downloadReceiptImage()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          <span>Download</span>
+        </button>
+        <button class="btn-success-done" onclick="closeModal()">Done</button>
       </div>
     </div>
   `;
